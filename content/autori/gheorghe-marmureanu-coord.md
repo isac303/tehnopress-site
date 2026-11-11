@@ -1,0 +1,4 @@
+{
+  "title": "Gheorghe Marmureanu (coord.)"
+}
+

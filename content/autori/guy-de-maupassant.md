@@ -1,0 +1,4 @@
+{
+  "title": "Guy de Maupassant"
+}
+

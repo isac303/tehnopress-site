@@ -1,0 +1,4 @@
+{
+  "title": "Management si marketing"
+}
+

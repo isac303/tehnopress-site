@@ -1,0 +1,4 @@
+{
+  "title": "Georg Trakl"
+}
+

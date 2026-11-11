@@ -1,0 +1,77 @@
+# Panou de administrare (Decap CMS). Editorul se deschide la /admin
+backend:
+  name: github
+  repo: isac303/tehnopress-site
+  branch: main
+locale: ro
+media_folder: static/media
+public_folder: /media
+publish_mode: simple
+
+collections:
+  - name: carti
+    label: Cărți
+    label_singular: carte
+    folder: content/carti
+    extension: md
+    format: json-frontmatter
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}} — {{author}}"
+    fields:
+      - {label: Titlu, name: title, widget: string}
+      - {label: Autor, name: author, widget: relation, collection: autori, search_fields: [title], value_field: title, display_fields: [title], hint: "Dacă autorul nu e în listă, adaugă-l mai întâi la secțiunea Autori."}
+      - {label: Colecție, name: collection, widget: relation, collection: colectii, search_fields: [title], value_field: title, display_fields: [title], required: false}
+      - {label: Data apariției, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", required: false}
+      - {label: Coperta, name: cover, widget: image, required: false}
+      - {label: Număr de pagini, name: pages, widget: number, value_type: int, required: false}
+      - {label: Format (ex. 13 x 20 cm), name: format, widget: string, required: false}
+      - {label: Tip copertă (ex. Cartonat), name: binding, widget: string, required: false}
+      - {label: ISBN, name: isbn, widget: string, required: false}
+      - {label: Cuprins (PDF), name: toc_pdf, widget: file, required: false}
+      - {label: Fragment (PDF), name: excerpt_pdf, widget: file, required: false}
+      - {label: Tiraj epuizat, name: out_of_print, widget: boolean, default: false}
+      - {label: Afișează pe prima pagină, name: featured, widget: boolean, default: false}
+      - {label: Descriere, name: body, widget: markdown, required: false}
+
+  - name: autori
+    label: Autori
+    label_singular: autor
+    folder: content/autori
+    extension: md
+    format: json-frontmatter
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Nume (Prenume Nume)", name: title, widget: string}
+      - {label: Prezentare, name: body, widget: markdown, required: false}
+
+  - name: colectii
+    label: Colecții
+    label_singular: colecție
+    folder: content/colectii
+    extension: md
+    format: json-frontmatter
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: Nume, name: title, widget: string}
+      - {label: Descriere, name: body, widget: markdown, required: false}
+
+  - name: pagini
+    label: Pagini (Despre noi, Contact)
+    files:
+      - label: Despre noi
+        name: despre
+        file: content/pagini/despre.md
+        format: json-frontmatter
+        fields:
+          - {label: Titlu, name: title, widget: string}
+          - {label: Text, name: body, widget: markdown}
+      - label: Contact
+        name: contact
+        file: content/pagini/contact.md
+        format: json-frontmatter
+        fields:
+          - {label: Titlu, name: title, widget: string}
+          - {label: Text, name: body, widget: markdown}
